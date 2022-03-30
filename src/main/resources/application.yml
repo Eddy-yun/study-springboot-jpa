@@ -1,9 +1,31 @@
 #JPA SQL 표시
-spring:
+server:
+  port: 8080
 
+spring:
+  datasource:
+    # 로컬 경로 저장소 방식
+    url: jdbc:h2:/Users/eddy/playstation/h2/testdb;MODE=MySQL;DATABASE_TO_LOWER=TRUE
+    # 인메모리 방식
+    #url: jdbc:h2:mem:testdb;MODE=MySQL;DATABASE_TO_LOWER=TRUE
   jpa:
+    hibernate:
+      ddl-auto: create-drop
     show-sql: true
-    database-platform: org.hibernate.dialect.H2Dialect
+    properties:
+      hibernate:
+        # JPA SQL format
+        format_sql: true
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
   h2:
     console:
       enabled: true
+
+logging:
+  level:
+    org:
+      hibernate:
+        type:
+          descriptor:
+            # JPA value 확인
+            sql: trace
